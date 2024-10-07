@@ -1,3 +1,5 @@
+import {useState} from 'react';
+
 function SearchBar() {
     const [location, setLocation] = useState('');
     
@@ -9,13 +11,13 @@ function SearchBar() {
       <div className="search-bar">
         <input 
           type="text" 
-          placeholder="Where are you going?" 
+          placeholder="Hi! Where are you going?" 
           value={location} 
           onChange={(e) => setLocation(e.target.value)} 
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch} className="search-btn"><i style={{fontSize: '20px',color: 'white'}} class="fa">&#xf002;</i></button>
       </div>
     );
   }
   export default SearchBar;
-  
+ 
