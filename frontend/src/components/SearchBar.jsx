@@ -8,14 +8,16 @@ function SearchBar() {
     };
     
     return (
-      <div className="search-bar">
-        <input 
-          type="text" 
-          placeholder="Hi! Where are you going?" 
-          value={location} 
-          onChange={(e) => setLocation(e.target.value)} 
-        />
-        <button onClick={handleSearch} className="search-btn"><i style={{fontSize: '20px',color: 'white'}} class="fa">&#xf002;</i></button>
+      <div className='search-main'>
+        <div className="search-bar">
+          <input 
+            type="text" 
+            placeholder="Hi! Where are you going?" 
+            value={location} 
+            onChange={(e) => setLocation(e.target.value)} 
+          />
+          <button onClick={handleSearch} className="search-btn"><i style={{fontSize: '20px',color: 'white'}} class="fa">&#xf002;</i></button>
+        </div>
       </div>
     );
   }

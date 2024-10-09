@@ -59,15 +59,23 @@ body {
   text-decoration: none;
 }
 
+.search-main{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+
 .search-bar {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  align-self: center;
   background-color: #f7f7f7;
   padding: 10px;
   border-radius: 50px;
   border: 1px solid #ddd;
-  margin: 0 20px;
-  width: 800px;
+  margin: 20px;
+  width: 500px;
 }
 
 .search-bar input {
@@ -79,7 +87,7 @@ body {
 }
 
 .search-bar input::placeholder {
-  color: #999;
+  color: #000000;
 }
 
 .search-btn {
@@ -90,3 +98,4 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
