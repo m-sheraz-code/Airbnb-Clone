@@ -1,3 +1,4 @@
+
 function ListingCard({ image, title, type, guests, bedrooms, bathrooms, price, rating }) {
     return (
       <div className="listing-card">

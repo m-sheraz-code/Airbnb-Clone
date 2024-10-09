@@ -10,13 +10,14 @@ body {
   font-family: 'montserrat', sans-serif;
 }
 
+/*NAVBAR*/
+
 .navbar {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 15px 30px;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 1px solid #ddd;
 }
 
 .logo {
@@ -27,7 +28,7 @@ body {
 }
 
 .logo img {
-  height: 100px;
+  height: 80px;
   margin-right: 10px;
 }
 
@@ -59,10 +60,15 @@ body {
   text-decoration: none;
 }
 
+
+/*SEARCH BAR*/
+
 .search-main{
   display: flex;
   justify-content: center;
   align-self: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 
@@ -74,8 +80,7 @@ body {
   padding: 10px;
   border-radius: 50px;
   border: 1px solid #ddd;
-  margin: 20px;
-  width: 500px;
+  width: 40%;
 }
 
 .search-bar input {
@@ -99,3 +104,54 @@ body {
   cursor: pointer;
 }
 
+
+/*CATEGORIES*/
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.categories button{
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+
+.categories button img{
+  height: 30px;
+  opacity: 0.7;
+}
+
+.categories button p {
+  padding: 5px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: bold;
+}
+
+
+.categories.active button p {
+  color: black;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+.categories button:hover p {
+  color:black;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 10px;
+}
+
+.categories button:hover img{
+  scale: (1.02);
+  opacity: 1;
+}

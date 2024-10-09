@@ -12,7 +12,7 @@ function SearchBar() {
         <div className="search-bar">
           <input 
             type="text" 
-            placeholder="Hi! Where are you going?" 
+            placeholder="Hi! Where you want to go?"
             value={location} 
             onChange={(e) => setLocation(e.target.value)} 
           />
