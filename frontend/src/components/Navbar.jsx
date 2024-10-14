@@ -1,10 +1,9 @@
-import logo from '../assets/logo.png';
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo">
-        <a href="/home"><img src={logo} alt="Airbnb Logo" /></a>
+        <a href="/home"><img src={require('../assets/logo.png')} alt="Airbnb Logo" /></a>
       </div>
       <div className="nav-links">
         <a href="/home">Experiences</a>

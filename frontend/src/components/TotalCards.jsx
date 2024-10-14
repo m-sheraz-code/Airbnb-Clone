@@ -2,7 +2,7 @@ import ListingCard from './ListingCard';
 
 const listings = [
   {
-    image: 'image1.jpg',
+    image: require('../assets/products/image1.jpg'),
     title: 'Cozy Apartment',
     type: 'Apartment',
     guests: 2,
@@ -12,7 +12,7 @@ const listings = [
     rating: 4.5,
   },
   {
-    image: 'image2.jpg',
+    image: require('../assets/products/image2.jpg'),
     title: 'Modern Villa',
     type: 'Villa',
     guests: 6,
@@ -22,17 +22,17 @@ const listings = [
     rating: 4.8,
   },
   {
-    image: '../products/image3.jpg',
+    image: require('../assets/products/image3.jpg'),
     title: 'Beach House',
     type: 'House',
     guests: 8,
     bedrooms: 4,
     bathrooms: 3,
     price: 400,
-    rating: 4.9,
+    rating: 3,
   },
   {
-    image: 'image4.jpg',
+    image: require('../assets/products/image4.jpg'),
     title: 'Mountain Cabin',
     type: 'Cabin',
     guests: 4,
@@ -42,7 +42,7 @@ const listings = [
     rating: 4.7,
   },
   {
-    image: 'image5.jpg',
+    image: require('../assets/products/image5.jpg'),
     title: 'City Loft',
     type: 'Loft',
     guests: 3,
@@ -52,7 +52,7 @@ const listings = [
     rating: 4.6,
   },
   {
-    image: 'image6.jpg',
+    image: require('../assets/products/image6.jpg'),
     title: 'Countryside Cottage',
     type: 'Cottage',
     guests: 5,
@@ -62,7 +62,7 @@ const listings = [
     rating: 4.7,
   },
   {
-    image: 'image7.jpg',
+    image: require('../assets/products/image7.jpg'),
     title: 'Luxury Penthouse',
     type: 'Penthouse',
     guests: 4,
@@ -72,7 +72,7 @@ const listings = [
     rating: 4.9,
   },
   {
-    image: 'image8.jpg',
+    image: require('../assets/products/image8.jpg'),
     title: 'Rustic Barn',
     type: 'Barn',
     guests: 7,
@@ -82,7 +82,7 @@ const listings = [
     rating: 4.4,
   },
   {
-    image: 'image9.jpg',
+    image: require('../assets/products/image9.jpg'),
     title: 'Seaside Bungalow',
     type: 'Bungalow',
     guests: 6,

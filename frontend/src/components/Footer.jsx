@@ -1,10 +1,10 @@
-import logo from '../assets/logo.png';
+import logo2 from '../assets/logo2.png';
 
 function Footer() {
   return (
     <footer className="footer">
       <div className="footer-logo">
-        <a href="/home"><img src={logo} alt="Airbnb Logo" /></a>
+        <img src={logo2} alt="Airbnb Logo" />
       </div>
       <ul className="footer-menu">
         <li>Support</li>
@@ -13,7 +13,6 @@ function Footer() {
         <li>About</li>
       </ul>
       <div className="footer-social-media">
-        <p>Follow us on</p>
         <div className="social-icons">
           <i className="fa fa-instagram"></i>
           <i className="fa fa-twitter"></i>
