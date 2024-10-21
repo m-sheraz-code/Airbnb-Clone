@@ -10,6 +10,7 @@ const listings = [
     bathrooms: 1,
     price: 120,
     rating: 4.5,
+    category: 'Amazing views',
   },
   {
     image: require('../assets/products/image2.jpg'),
@@ -20,6 +21,7 @@ const listings = [
     bathrooms: 2,
     price: 250,
     rating: 4.8,
+    category: 'Trending',
   },
   {
     image: require('../assets/products/image3.jpg'),
@@ -30,6 +32,7 @@ const listings = [
     bathrooms: 3,
     price: 400,
     rating: 3,
+    category: 'Seaside',
   },
   {
     image: require('../assets/products/image4.jpg'),
@@ -40,6 +43,7 @@ const listings = [
     bathrooms: 1,
     price: 180,
     rating: 4.7,
+    category: 'Amazing views',
   },
   {
     image: require('../assets/products/image5.jpg'),
@@ -50,6 +54,7 @@ const listings = [
     bathrooms: 1,
     price: 150,
     rating: 4.6,
+    category: 'Top cities',
   },
   {
     image: require('../assets/products/image6.jpg'),
@@ -60,6 +65,7 @@ const listings = [
     bathrooms: 2,
     price: 200,
     rating: 4.7,
+    category: 'Historical homes',
   },
   {
     image: require('../assets/products/image7.jpg'),
@@ -70,6 +76,7 @@ const listings = [
     bathrooms: 2,
     price: 300,
     rating: 4.9,
+    category: 'Trending',
   },
   {
     image: require('../assets/products/image8.jpg'),
@@ -80,6 +87,7 @@ const listings = [
     bathrooms: 2,
     price: 220,
     rating: 4.4,
+    category: 'OMG',
   },
   {
     image: require('../assets/products/image9.jpg'),
@@ -90,6 +98,7 @@ const listings = [
     bathrooms: 2,
     price: 260,
     rating: 4.8,
+    category: 'Trending',
   },
 ];
 
