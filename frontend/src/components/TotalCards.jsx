@@ -1,108 +1,23 @@
+import React, { useState, useEffect } from 'react';
 import ListingCard from './ListingCard';
 
-const listings = [
-  {
-    image: require('../assets/products/image1.jpg'),
-    title: 'Cozy Apartment',
-    type: 'Apartment',
-    guests: 2,
-    bedrooms: 1,
-    bathrooms: 1,
-    price: 120,
-    rating: 4.5,
-    category: 'Amazing views',
-  },
-  {
-    image: require('../assets/products/image2.jpg'),
-    title: 'Modern Villa',
-    type: 'Villa',
-    guests: 6,
-    bedrooms: 3,
-    bathrooms: 2,
-    price: 250,
-    rating: 4.8,
-    category: 'Trending',
-  },
-  {
-    image: require('../assets/products/image3.jpg'),
-    title: 'Beach House',
-    type: 'House',
-    guests: 8,
-    bedrooms: 4,
-    bathrooms: 3,
-    price: 400,
-    rating: 3,
-    category: 'Seaside',
-  },
-  {
-    image: require('../assets/products/image4.jpg'),
-    title: 'Mountain Cabin',
-    type: 'Cabin',
-    guests: 4,
-    bedrooms: 2,
-    bathrooms: 1,
-    price: 180,
-    rating: 4.7,
-    category: 'Amazing views',
-  },
-  {
-    image: require('../assets/products/image5.jpg'),
-    title: 'City Loft',
-    type: 'Loft',
-    guests: 3,
-    bedrooms: 1,
-    bathrooms: 1,
-    price: 150,
-    rating: 4.6,
-    category: 'Top cities',
-  },
-  {
-    image: require('../assets/products/image6.jpg'),
-    title: 'Countryside Cottage',
-    type: 'Cottage',
-    guests: 5,
-    bedrooms: 2,
-    bathrooms: 2,
-    price: 200,
-    rating: 4.7,
-    category: 'Historical homes',
-  },
-  {
-    image: require('../assets/products/image7.jpg'),
-    title: 'Luxury Penthouse',
-    type: 'Penthouse',
-    guests: 4,
-    bedrooms: 2,
-    bathrooms: 2,
-    price: 300,
-    rating: 4.9,
-    category: 'Trending',
-  },
-  {
-    image: require('../assets/products/image8.jpg'),
-    title: 'Rustic Barn',
-    type: 'Barn',
-    guests: 7,
-    bedrooms: 3,
-    bathrooms: 2,
-    price: 220,
-    rating: 4.4,
-    category: 'OMG',
-  },
-  {
-    image: require('../assets/products/image9.jpg'),
-    title: 'Seaside Bungalow',
-    type: 'Bungalow',
-    guests: 6,
-    bedrooms: 2,
-    bathrooms: 2,
-    price: 260,
-    rating: 4.8,
-    category: 'Trending',
-  },
-];
-
 function TotalCards() {
+  const [listings, setListings] = useState([]);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/listings');
+        const data = await response.json();
+        setListings(data);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
   return (
     <div className="total-cards">
       {listings.map((listing, index) => (
