@@ -20,9 +20,10 @@ function TotalCards() {
 
   return (
     <div className="total-cards">
-      {listings.map((listing, index) => (
+      {listings.map((listing) => (
         <ListingCard
-          key={index}
+          key={listing.id}
+          id={listing.id} 
           image={listing.image}
           title={listing.title}
           type={listing.type}

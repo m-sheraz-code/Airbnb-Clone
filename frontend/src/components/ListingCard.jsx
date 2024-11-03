@@ -1,11 +1,19 @@
-function ListingCard({ image, title, type, guests, bedrooms, bathrooms, price, rating }) {
-  
-  // Helper function to render stars based on rating
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating }) {
+  const navigate = useNavigate();
+  const fullImageUrl = `http://localhost:5000${image}`;
+
+  const handleCardClick = () => {
+    navigate(`/listings/${id}`); 
+  };
+
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starType = (i <= Math.floor(rating)) ? 'fa-star' : 'fa-star-o'; // full star or outline
-      const halfStar = (i === Math.ceil(rating) && !Number.isInteger(rating)) ? 'fa-star-half-o' : starType; // half star for decimals
+      const starType = (i <= Math.floor(rating)) ? 'fa-star' : 'fa-star-o';
+      const halfStar = (i === Math.ceil(rating) && !Number.isInteger(rating)) ? 'fa-star-half-o' : starType;
       stars.push(
         <i
           key={i}
@@ -18,9 +26,9 @@ function ListingCard({ image, title, type, guests, bedrooms, bathrooms, price, r
   };
 
   return (
-    <div className="listing-card">
+    <div className="listing-card" onClick={handleCardClick}>
       <div className="image-container">
-        <img src={image} alt={title} className="listing-image" />
+        <img src={fullImageUrl} alt={title} className="listing-image" />
         <div className="live-tag"><strong>Live</strong></div>
       </div>
       <div className="listing-info">

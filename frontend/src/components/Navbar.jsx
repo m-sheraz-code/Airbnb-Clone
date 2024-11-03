@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo">
-        <a href="/home"><img src={require('../assets/logo.png')} alt="Airbnb Logo" /></a>
+        <Link to="/"><img src={require('../assets/logo.png')} alt="Airbnb Logo" /></Link>
       </div>
 
       <button className="hamburger" onClick={toggleMenu}>
@@ -18,36 +19,36 @@ const Navbar = () => {
       </button>
 
       <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
-        <a href="/home">
+        <Link to="/">
           <i className="fa fa-home" style={{ marginRight: '8px' }}></i>
           Home
-        </a>
-        <a href="/experiences">
+        </Link>
+        <Link to="/experiences">
           <i className="fa fa-map-marker" style={{ marginRight: '8px' }}></i>
           Experiences
-        </a>
-        <a href="/online-experiences">
+        </Link>
+        <Link to="/online-experiences">
           <i className="fa fa-laptop" style={{ marginRight: '8px' }}></i>
           Online Experiences
-        </a>
+        </Link>
         <div className="right-menu-mobile">
-        <a href="/profile">
-          <i
-            style={{
-              fontSize: '24px',
-              color: 'white',
-              padding: '10px 15px',
-              borderRadius: '50%',
-              backgroundColor: '#ff385c',
-            }}
-            className="fa fa-user"></i>
-            <p>Login / Singup</p>
-        </a>
-      </div>
+          <Link to="/profile">
+            <i
+              style={{
+                fontSize: '24px',
+                color: 'white',
+                padding: '10px 15px',
+                borderRadius: '50%',
+                backgroundColor: '#ff385c',
+              }}
+              className="fa fa-user"></i>
+            <p>Login / Signup</p>
+          </Link>
+        </div>
       </div>
 
       <div className="right-menu">
-        <a href="/profile">
+        <Link to="/profile">
           <i
             style={{
               fontSize: '24px',
@@ -57,8 +58,8 @@ const Navbar = () => {
               backgroundColor: '#ff385c',
             }}
             className="fa fa-user"></i>
-            <p>Login / Singup</p>
-        </a>
+          <p>Login / Signup</p>
+        </Link>
       </div>
     </nav>
   );

@@ -9,7 +9,8 @@ function ListingDetails() {
   useEffect(() => {
     fetch(`http://localhost:5000/api/listings/${id}`)
       .then(response => response.json())
-      .then(data => setListing(data));
+      .then(data => setListing(data))
+      .catch(error => console.error("Error fetching listing details:", error));
   }, [id]);
 
   return (
@@ -18,11 +19,11 @@ function ListingDetails() {
         <>
           <h1>{listing.title}</h1>
           <p>Type: {listing.type}</p>
-          <p>Amenities: {listing.amenities.join(', ')}</p>
           <p>Guests: {listing.guests}</p>
           <p>Bedrooms: {listing.bedrooms}</p>
           <p>Bathrooms: {listing.bathrooms}</p>
           <p>Price per night: ${listing.price}</p>
+          <p>Rating: {listing.rating} stars</p>
           <button onClick={() => navigate(`/booking/${id}`)}>Book Now</button>
         </>
       ) : (
