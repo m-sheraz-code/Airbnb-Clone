@@ -30,7 +30,7 @@ html,body {
 .navbar {
   display: flex;
   align-items: center;
-  padding: 15px 30px;
+  padding: 15px 30px !important;
   justify-content: space-between;
   background-color: var(--color-white);
   box-shadow: var(--shadow-1);
@@ -349,6 +349,7 @@ html,body {
   display: none;
 }
 
+
 @media (max-width: 400px) { 
   /*NAVBAR*/
 
@@ -459,4 +460,210 @@ html,body {
     padding: 20px;
   }
 
+}
+
+
+/* Modal container styles */
+.modal-content {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-1);
+  color: var(--color-dark-gray);
+  max-width: 800px;
+  margin: auto;
+  font-family: var(--font-family);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.modal-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-1);
+}
+
+.modal-body p {
+  font-size: 1rem;
+  color: var(--color-gray);
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.modal-footer .btn-secondary,
+.modal-footer .btn-primary {
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
+  font-weight: 500;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #6c757d;
+  color: var(--color-white);
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.modal-footer .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: var(--color-hover-bg);
+}
+
+
+/* Booking Container */
+
+.Booking-hero-section {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+
+.Booking-hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* Hero Section Text */
+.Booking-hero-section-text {
+  position: relative;
+  z-index: 2;
+  font-size: 3.5em;
+  font-weight: bold;
+  color: white;
+}
+
+.booking-page {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-details {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.top-heading{
+  align-self: center;
+  font-size: 2.0em;
+  font-weight: bold;
+}
+
+.booking-details p {
+  margin: 8px 0;
+}
+
+.booking-details p strong {
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-form label {
+  font-size: 1em;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-form input[type="date"] {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.booking-form input[type="text"] {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  padding: 10px 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--color-primary) !important;
+  border-color: #e8325b !important;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-hover-bg) !important;
+}
+
+.booking-success {
+  color: #27ae60;
+  font-weight: 600;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.booking-success .btn{
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.booking-success .btn:hover{
+  background-color: var(--color-hover-bg);
+  color: white;
 }

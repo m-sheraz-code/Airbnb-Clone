@@ -124,6 +124,7 @@ const listings = [
     },
 ];
 
+
 // Routes
 app.get('/api/listings', (req, res) => res.json(listings));
 
@@ -134,13 +135,27 @@ app.get('/api/listings/:id', (req, res) => {
 });
 
 app.get('/api/listings/search', (req, res) => {
-  const query = req.query.query.toLowerCase();
-  const results = listings.filter(listing => listing.title.toLowerCase().includes(query));
+  const query = req.query.query ? req.query.query.toLowerCase() : '';
+
+  if (!query) {
+    return res.status(400).json({ message: 'Query parameter is required' });
+  }
+
+  const results = listings.filter(listing =>
+    listing.title.toLowerCase().includes(query) ||
+    listing.type.toLowerCase().includes(query) ||
+    listing.category.toLowerCase().includes(query) ||
+    listing.location.toLowerCase().includes(query)
+  );
+
   res.json(results);
 });
 
+
 app.post('/api/bookings', (req, res) => {
   const { listingId, checkIn, checkOut } = req.body;
+
+  // store in database baad mai
   res.json({
     message: 'Booking created successfully',
     booking: { listingId, checkIn, checkOut }
