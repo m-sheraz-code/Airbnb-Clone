@@ -24,6 +24,7 @@
 html,body {
   font-family: var(--font-family);
   overflow-x: hidden;
+  padding: 0;
 }
 
 /* NAVBAR */
@@ -142,7 +143,6 @@ html,body {
   display: none;
 }
 
-
 .categories button {
   border: none;
   background: none;
@@ -166,9 +166,10 @@ html,body {
   font-weight: bold;
 }
 
-.categories.active button p {
+.categories button.active p {
   color: var(--color-black);
   text-decoration: underline;
+  text-decoration-thickness: 2px;
   text-underline-offset: 10px;
 }
 
@@ -180,7 +181,7 @@ html,body {
 }
 
 .categories button:hover img {
-  scale: (1.02);
+  transform: scale(1.02);
   opacity: 1;
 }
 
@@ -495,12 +496,24 @@ html,body {
   box-shadow: var(--shadow-1);
 }
 
-.modal-body p {
-  font-size: 1rem;
-  color: var(--color-gray);
-  margin: 0.5rem 0;
-  line-height: 1.5;
+.modal-body span {
+  font-weight: 700;
+  color: var(--color-black);
 }
+
+
+.two-column-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.two-column-list li {
+  flex: 1 1 calc(50% - 10px);
+  display: flex;
+  align-items: center;
+}
+
 
 .modal-footer {
   border-top: 1px solid var(--color-border);

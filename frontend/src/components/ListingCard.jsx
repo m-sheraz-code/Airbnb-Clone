@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-bootstrap'; // Correct import from react-bootstrap
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating }) {
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const fullImageUrl = `http://localhost:5000${image}`;
 
@@ -64,13 +64,35 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
         </Modal.Header>
         <Modal.Body>
           <img src={fullImageUrl} alt={title} className="img-fluid" />
-          <p>Type: {type}</p>
-          <p>Guests: {guests}</p>
-          <p>Bedrooms: {bedrooms}</p>
-          <p>Bathrooms: {bathrooms}</p>
-          <p>Price per night: ${price}</p>
-          <p>Rating: {rating} stars</p>
+          <ul className="list-unstyled two-column-list">
+            <li>
+              <i className="fa fa-tag" style={{ color: '#ff385c' }}></i>
+              <span>&nbsp;Type: </span> &nbsp;{type}
+            </li>
+            <li>
+              <i className="fa fa-user" style={{ color: '#ff385c' }}></i>
+              <span>&nbsp;Guests: </span>&nbsp; {guests}
+            </li>
+            <li>
+              <i className="fa fa-bed" style={{ color: '#ff385c' }}></i>
+              <span>&nbsp;Bedrooms: </span>&nbsp; {bedrooms}
+            </li>
+            <li>
+              <i className="fa fa-bath" style={{ color: '#ff385c' }}></i>
+              <span>&nbsp;Bathrooms: </span>&nbsp; {bathrooms}
+            </li>
+            <li>
+              <i className="fa fa-dollar" style={{ color: '#ff385c' }}></i>
+              <span>&nbsp;Price per night: </span>&nbsp; ${price}
+            </li>
+            <li>
+              <i className="fa fa-star" style={{ color: '#ff385c' }}></i>
+              <span>&nbsp;Rating: </span>&nbsp; {rating} Stars
+            </li>
+          </ul>
         </Modal.Body>
+
+
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleClose}>Close</button>
           <button className="btn btn-primary" onClick={handleBooking}>Book Now</button> {/* Use navigate here */}
