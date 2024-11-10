@@ -69,27 +69,27 @@ function BookingPage() {
         <div className="booking-details">
             <ul className="list-unstyled two-column-list">
               <li>
-                <i className="fa fa-tag" style={{ color: '#ff385c' }}></i>
+                <i className="fa fa-tag" style={{  color: '#ff385c', marginRight: '6px' }}></i>
                 <span>&nbsp;Type: </span> &nbsp;{listing.type}
               </li>
               <li>
-                <i className="fa fa-user" style={{ color: '#ff385c' }}></i>
+                <i className="fa fa-user" style={{ color: '#ff385c', marginRight: '6px'}}></i>
                 <span>&nbsp;Guests: </span>&nbsp; {listing.guests}
               </li>
               <li>
-                <i className="fa fa-bed" style={{ color: '#ff385c' }}></i>
+                <i className="fa fa-bed" style={{  color: '#ff385c', marginRight: '6px' }}></i>
                 <span>&nbsp;Bedrooms: </span>&nbsp; {listing.bedrooms}
               </li>
               <li>
-                <i className="fa fa-bath" style={{ color: '#ff385c' }}></i>
+                <i className="fa fa-bath" style={{  color: '#ff385c', marginRight: '6px' }}></i>
                 <span>&nbsp;Bathrooms: </span>&nbsp; {listing.bathrooms}
               </li>
               <li>
-                <i className="fa fa-dollar" style={{ color: '#ff385c' }}></i>
+                <i className="fa fa-dollar" style={{ color: '#ff385c', marginRight: '6px' }}></i>
                 <span>&nbsp;Price per night: </span>&nbsp; ${listing.price}
               </li>
               <li>
-                <i className="fa fa-star" style={{ color: '#ff385c' }}></i>
+                <i className="fa fa-star" style={{  color: '#ff385c', marginRight: '6px' }}></i>
                 <span>&nbsp;Rating: </span>&nbsp; {listing.rating} Stars
               </li>
            </ul>

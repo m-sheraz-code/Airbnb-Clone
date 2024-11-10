@@ -1,5 +1,5 @@
 :root {
-  --font-family: 'montserrat', sans-serif;
+  --font-family: 'Hind', sans-serif;
   --color-primary: #ff385c;
   --color-black: #000;
   --color-white: #fff;
@@ -336,9 +336,10 @@ html,body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   font-size: 14px;
   background-color: var(--color-primary);
+  margin: 0;
+  margin-top: 20px;
 }
 
 
