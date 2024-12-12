@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 function BookingPage() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [listing, setListing] = useState(null);
@@ -13,6 +13,11 @@ function BookingPage() {
   const [checkOut, setCheckOut] = useState('');
   const [name, setName] = useState('');
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  
+  const userId = user ? user.userId : null;
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -21,6 +26,9 @@ function BookingPage() {
         setListing(response.data);
       } catch (error) {
         console.error('Error fetching listing:', error);
+        setListing(null);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -29,7 +37,12 @@ function BookingPage() {
 
   const handleBooking = async () => {
     if (!checkIn || !checkOut || !name) {
-      alert("Please fill in all fields and ensure the number of guests is valid.");
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (!userId) {
+      alert("You must be logged in to make a booking.");
       return;
     }
 
@@ -39,6 +52,7 @@ function BookingPage() {
         checkIn,
         checkOut,
         name,
+        userId
       });
 
       if (response.status === 200) {
@@ -51,48 +65,52 @@ function BookingPage() {
   };
 
   const calculateTotal = () => {
-    const nights = (new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24);
-    return nights > 0 ? nights * listing.price: 0;
+    if (checkIn && checkOut) {
+      const nights = (new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24);
+      return nights > 0 ? nights * listing.price : 0;
+    }
+    return 0;
   };
 
-  if (!listing) return <div>Loading...</div>;
+  if (isLoading) return <div className='preloader'>Loading...</div>;
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className='Booking-hero-section' style={{ backgroundImage: `url(http://localhost:5000${listing.image})` }}>
         <h1 className='Booking-hero-section-text'>Book {listing.title}</h1>
       </div>
       <div className="booking-page">
         <h1 className='top-heading'>Fill the Form</h1>
+        <img src={require("../assets/pin.png")} className='pin-img' alt='Pin'/>
 
         <div className="booking-details">
-            <ul className="list-unstyled two-column-list">
-              <li>
-                <i className="fa fa-tag" style={{  color: '#ff385c', marginRight: '6px' }}></i>
-                <span>&nbsp;Type: </span> &nbsp;{listing.type}
-              </li>
-              <li>
-                <i className="fa fa-user" style={{ color: '#ff385c', marginRight: '6px'}}></i>
-                <span>&nbsp;Guests: </span>&nbsp; {listing.guests}
-              </li>
-              <li>
-                <i className="fa fa-bed" style={{  color: '#ff385c', marginRight: '6px' }}></i>
-                <span>&nbsp;Bedrooms: </span>&nbsp; {listing.bedrooms}
-              </li>
-              <li>
-                <i className="fa fa-bath" style={{  color: '#ff385c', marginRight: '6px' }}></i>
-                <span>&nbsp;Bathrooms: </span>&nbsp; {listing.bathrooms}
-              </li>
-              <li>
-                <i className="fa fa-dollar" style={{ color: '#ff385c', marginRight: '6px' }}></i>
-                <span>&nbsp;Price per night: </span>&nbsp; ${listing.price}
-              </li>
-              <li>
-                <i className="fa fa-star" style={{  color: '#ff385c', marginRight: '6px' }}></i>
-                <span>&nbsp;Rating: </span>&nbsp; {listing.rating} Stars
-              </li>
-           </ul>
+          <ul className="list-unstyled two-column-list">
+            <li>
+              <i className="fa fa-tag" style={{ color: '#ff385c', marginRight: '6px' }}></i>
+              <span>&nbsp;Type: </span> &nbsp;{listing.type}
+            </li>
+            <li>
+              <i className="fa fa-user" style={{ color: '#ff385c', marginRight: '6px' }}></i>
+              <span>&nbsp;Guests: </span>&nbsp; {listing.guests}
+            </li>
+            <li>
+              <i className="fa fa-bed" style={{ color: '#ff385c', marginRight: '6px' }}></i>
+              <span>&nbsp;Bedrooms: </span>&nbsp; {listing.bedrooms}
+            </li>
+            <li>
+              <i className="fa fa-bath" style={{ color: '#ff385c', marginRight: '6px' }}></i>
+              <span>&nbsp;Bathrooms: </span>&nbsp; {listing.bathrooms}
+            </li>
+            <li>
+              <i className="fa fa-dollar" style={{ color: '#ff385c', marginRight: '6px' }}></i>
+              <span>&nbsp;Price per night: </span>&nbsp; ${listing.price}
+            </li>
+            <li>
+              <i className="fa fa-star" style={{ color: '#ff385c', marginRight: '6px' }}></i>
+              <span>&nbsp;Rating: </span>&nbsp; {listing.rating} Stars
+            </li>
+          </ul>
         </div>
 
         <div className="booking-form">
@@ -137,10 +155,9 @@ function BookingPage() {
               Return to Home
             </button>
           </div>
-        )} 
-
-        </div>
-      <Footer/>
+        )}
+      </div>
+      <Footer />
     </>
   );
 }

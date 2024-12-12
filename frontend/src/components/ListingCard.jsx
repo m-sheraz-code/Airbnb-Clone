@@ -95,7 +95,7 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
 
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleClose}>Close</button>
-          <button className="btn btn-primary" onClick={handleBooking}>Book Now</button> {/* Use navigate here */}
+          <button className="btn btn-primary" onClick={handleBooking}>Book Now</button> 
         </Modal.Footer>
       </Modal>
     </div>

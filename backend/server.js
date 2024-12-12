@@ -5,27 +5,28 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
+const path = require('path'); 
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Import models
-const Property = require('./models/property');
+const Listing = require('./models/listing');
 const Booking = require('./models/booking');
 const User = require('./models/user');
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/images', express.static(path.join(__dirname, 'public/images'))); 
 
 // Connect to MongoDB
 mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
@@ -80,7 +81,15 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ message: 'Login successful', token });
+    res.json({ 
+      message: 'Login successful', 
+      token, 
+      user: { 
+        id: user._id, 
+        username: user.username, 
+        role: user.role 
+      } 
+    });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error });
   }
@@ -89,7 +98,7 @@ app.post('/api/auth/login', async (req, res) => {
 // Fetch all listings
 app.get('/api/listings', async (req, res) => {
   try {
-    const listings = await Property.find();
+    const listings = await Listing.find();
     res.json(listings);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching listings', error });
@@ -99,7 +108,7 @@ app.get('/api/listings', async (req, res) => {
 // Fetch a specific listing
 app.get('/api/listings/:id', async (req, res) => {
   try {
-    const listing = await Property.findById(req.params.id);
+    const listing = await Listing.findById(req.params.id);
     if (!listing) return res.status(404).json({ message: 'Listing not found' });
     res.json(listing);
   } catch (error) {
@@ -112,7 +121,7 @@ app.get('/api/listings/search', async (req, res) => {
   const query = req.query.query ? req.query.query.toLowerCase() : '';
 
   try {
-    const results = await Property.find({
+    const results = await Listing.find({
       $or: [
         { title: new RegExp(query, 'i') },
         { type: new RegExp(query, 'i') },
@@ -142,7 +151,7 @@ app.post('/api/bookings', authenticateJWT, async (req, res) => {
 // Add a new listing
 app.post('/api/admin/listings', authenticateJWT, authorizeAdmin, async (req, res) => {
   try {
-    const listing = new Property(req.body);
+    const listing = new Listing(req.body);
     await listing.save();
     res.status(201).json({ message: 'Listing added successfully', listing });
   } catch (error) {
@@ -153,7 +162,7 @@ app.post('/api/admin/listings', authenticateJWT, authorizeAdmin, async (req, res
 // Delete a listing
 app.delete('/api/admin/listings/:id', authenticateJWT, authorizeAdmin, async (req, res) => {
   try {
-    const deletedListing = await Property.findByIdAndDelete(req.params.id);
+    const deletedListing = await Listing.findByIdAndDelete(req.params.id);
     if (!deletedListing) return res.status(404).json({ message: 'Listing not found' });
     res.json({ message: 'Listing deleted successfully', deletedListing });
   } catch (error) {
@@ -175,3 +184,5 @@ app.get('/api/admin/bookings', authenticateJWT, authorizeAdmin, async (req, res)
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+ 
+ 

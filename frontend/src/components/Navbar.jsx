@@ -15,7 +15,7 @@ const Navbar = () => {
       </div>
 
       <button className="hamburger" onClick={toggleMenu}>
-        <i className={menuOpen ? "fa fa-times" : "fa fa-bars"}></i> {/* Toggle between burger and close icon */}
+        <i className={menuOpen ? "fa fa-times" : "fa fa-bars"}></i>
       </button>
 
       <div className={`nav-links ${menuOpen ? 'active' : ''}`}>

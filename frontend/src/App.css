@@ -27,6 +27,17 @@ html,body {
   padding: 0;
 }
 
+.preloader{
+  color:#e8325b;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+
 /* NAVBAR */
 .navbar {
   display: flex;
@@ -352,119 +363,6 @@ html,body {
 }
 
 
-@media (max-width: 400px) { 
-  /*NAVBAR*/
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Start off-canvas */
-    height: 100%;
-    width: 250px;
-    background-color: var(--color-white);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 50px 20px;
-    box-shadow: var(--shadow-1);
-    transition: right var(--transition);
-    z-index: 999;
-  }
-
-  .nav-links a {
-    font-size: 15px;
-  }
-  
-  
-  .nav-links.active {
-    left: 0;
-  }
-  
-  .hamburger {
-    display: block;
-    font-size: 30px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: var(--color-black);
-  }
-
-  .right-menu{
-    display: none;
-  }
-
-  .right-menu-mobile{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-  }
-
-  .right-menu-mobile a{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  /*Categories*/
-  .categories button {
-    min-width: 70px;
-  }
-
-  .categories{
-    justify-content: space-between;
-    align-items: start;
-    padding: 20px 10px;
-  }
-
-  .categories button img {
-    height: 30px;
-    opacity: 0.7;
-  }
-  
-  .categories button p {
-    font-size: 10px;
-  }
-  
-  .categories.active button p {
-    text-decoration: none;
-  }
-  
-  .categories button:hover p {
-    text-decoration: none;
-  }
-
-  /* LISTING CARDS AREA */
-  .total-cards {
-    grid-template-columns: repeat(1, 1fr);
-   
-  }
-
-  /* FOOTER */   
-
-  .footer-logo img {
-    height: 100px;
-    width: 100px;
-  }
-
-  .footer-menu {
-    gap: 15px;
-    width: 60%;
-  }
-
-  .social-icons {
-    gap: 20px;
-  }
-
-  /*SEARCH BAR*/
-  .search-main {
-    padding: 20px;
-  }
-
-}
-
-
 /* Modal container styles */
 .modal-content {
   border-radius: 10px;
@@ -556,7 +454,7 @@ html,body {
 /* Booking Container */
 
 .Booking-hero-section {
-  height: 500px;
+  min-height: 500px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -592,8 +490,8 @@ html,body {
 .booking-page {
   max-width: 800px;
   margin: 20px auto;
+  position: relative;
   padding: 20px;
-  font-family: Arial, sans-serif;
   color: #333;
   background-color: #f8f9fa;
   border-radius: 20px;
@@ -607,18 +505,13 @@ html,body {
 }
 
 .top-heading{
-  align-self: center;
-  font-size: 2.0em;
+  font-size: 2.5em;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .booking-details p {
   margin: 8px 0;
-}
-
-.booking-details p strong {
-  color: #2c3e50;
-  font-weight: 500;
 }
 
 .booking-form {
@@ -680,4 +573,235 @@ html,body {
 .booking-success .btn:hover{
   background-color: var(--color-hover-bg);
   color: white;
+}
+
+.booking-page .pin-img {
+  width: 10%;
+  position: absolute;
+  top: -20px; 
+  right: -15px;
+}
+
+
+@media (max-width: 400px) { 
+  /*NAVBAR*/
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-canvas */
+    height: 100%;
+    width: 250px;
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px 20px;
+    box-shadow: var(--shadow-1);
+    transition: right var(--transition);
+    z-index: 999;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+  }
+  
+  
+  .nav-links.active {
+    left: 0;
+  }
+  
+  .hamburger {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--color-black);
+  }
+
+  .right-menu{
+    display: none;
+  }
+
+  .right-menu-mobile{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .right-menu-mobile a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .right-menu-mobile a p{
+    margin-bottom: 0px;
+  }
+
+  /*Categories*/
+  .categories button {
+    min-width: 70px;
+  }
+
+  .categories{
+    justify-content: space-between;
+    align-items: start;
+    padding: 20px 10px;
+  }
+
+  .categories button img {
+    height: 30px;
+    opacity: 0.7;
+  }
+  
+  .categories button p {
+    font-size: 10px;
+  }
+  
+  .categories button.active p {
+    text-decoration: none;
+  }
+  
+  .categories button:hover p {
+    text-decoration: none;
+  }
+
+  /* LISTING CARDS AREA */
+  .total-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  /* FOOTER */   
+
+  .footer-logo img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .footer-menu {
+    gap: 15px;
+    width: 60%;
+  }
+
+  .social-icons {
+    gap: 20px;
+  }
+
+  /*SEARCH BAR*/
+  .search-main {
+    padding: 20px;
+  }
+  
+  /* Modal container styles */
+
+  .modal-body span {
+    font-weight: 600;
+  }
+
+  .modal-body{
+    font-size: 13px !important;
+  }
+
+  .two-column-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .two-column-list li {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    align-items: center;
+  }
+
+  /* Booking Container */
+  .Booking-hero-section {
+    min-height: 300px;
+  }
+
+  .Booking-hero-section-text {
+    font-size: 2.5em;
+  }
+
+  .booking-page {
+    margin: 20px 10px;
+  }
+
+  .top-heading{
+    text-align: center;
+  }
+
+  .booking-details li{
+    font-size: 14px;
+  }
+
+  .booking-details span {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  .booking-page .pin-img {
+    width: 15%;
+    position: absolute;
+    top: -15px; 
+    right: -5px;
+  }
+
+}
+
+
+
+/*Login Signup Page*/
+
+.login-signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-signup-container .input-group {
+  margin-bottom: 15px;
+}
+
+.login-signup-container .input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-signup-container .input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.login-signup-container button {
+  padding: 10px 15px;
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-signup-container button:hover {
+  background-color: #ff2a3d;
+}
+
+.login-signup-container .error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.login-signup-container .toggle-link button {
+  background: none;
+  border: none;
+  color: #ff385c;
+  cursor: pointer;
 }
