@@ -15,7 +15,7 @@ function BookingPage() {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
   
   const userId = user ? user.userId : null;
 

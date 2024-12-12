@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [username, setUsername] = useState(null);
+
+  // Load the username from localStorage on component mount
+  useEffect(() => {
+    try {
+      const userData = localStorage.getItem('user');
+      const user = userData ? JSON.parse(userData) : null;
+      setUsername(user ? user.username : null);
+    } catch (error) {
+      console.error('Error parsing user data from localStorage:', error);
+    }
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -11,7 +23,9 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo">
-        <Link to="/"><img src={require('../assets/logo.png')} alt="Airbnb Logo" /></Link>
+        <Link to="/">
+          <img src={require('../assets/logo.png')} alt="Airbnb Logo" />
+        </Link>
       </div>
 
       <button className="hamburger" onClick={toggleMenu}>
@@ -42,7 +56,7 @@ const Navbar = () => {
                 backgroundColor: '#ff385c',
               }}
               className="fa fa-user"></i>
-            <p>Login / Signup</p>
+            <p>{username ? username : 'Login / Signup'}</p>
           </Link>
         </div>
       </div>
@@ -58,7 +72,7 @@ const Navbar = () => {
               backgroundColor: '#ff385c',
             }}
             className="fa fa-user"></i>
-          <p>Login / Signup</p>
+          <p>{username ? username : 'Login / Signup'}</p>
         </Link>
       </div>
     </nav>

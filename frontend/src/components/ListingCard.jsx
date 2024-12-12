@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating }) {
   const [showModal, setShowModal] = useState(false);
+  const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
   const fullImageUrl = `http://localhost:5000${image}`;
+
+  // Load the username from localStorage on component mount
+    useEffect(() => {
+      try {
+        const userData = localStorage.getItem('user');
+        const user = userData ? JSON.parse(userData) : null;
+        setUserRole(user ? user.role : null);
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+      }
+    }, []);
 
   const handleCardClick = () => {
     setShowModal(true);
@@ -19,6 +31,10 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
 
   const handleBooking = () => {
     navigate(`/bookings/${id}`);
+  };
+
+  const handleDeleteCard = () =>{
+    
   };
 
   const renderStars = () => {
@@ -43,6 +59,7 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
         <div className="image-container">
           <img src={fullImageUrl} alt={title} className="listing-image" />
           <div className="live-tag"><strong>Live</strong></div>
+          {userRole === 'admin' && (<div onClick={handleDeleteCard} className="del-btn"><i className="fa fa-solid fa-trash"></i></div>)}
         </div>
         <div className="listing-info">
           <h3>{title}</h3>

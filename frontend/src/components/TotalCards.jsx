@@ -17,19 +17,18 @@ function TotalCards() {
         const response = await fetch('http://localhost:5000/api/listings');
         const data = await response.json();
         setListings(data);
-        setFilteredResults(data);  // Initialize filtered results with all listings
+        setFilteredResults(data);
       } catch (error) {
         setError("Error fetching listings");
         console.error("Error fetching listings:", error);
       } finally {
-        setLoading(false); // Set loading to false after the fetch attempt
+        setLoading(false); 
       }
     };
     fetchListings();
   }, []);
 
   useEffect(() => {
-    // Filter listings whenever the search term or category changes
     const results = listings.filter(listing => {
       const matchesSearch = listing.title.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === 'All' || listing.category === selectedCategory;
@@ -39,7 +38,7 @@ function TotalCards() {
   }, [searchTerm, selectedCategory, listings]);  
 
   if (loading) {
-    return <h1 style={{ textAlign: 'center' }}>Loading...</h1>;
+    return <div className='preloader'>Loading...</div>;
   }
 
   if (error) {
@@ -55,8 +54,8 @@ function TotalCards() {
         {filteredResults.length > 0 ? (
           filteredResults.map((listing) => (
             <ListingCard
-              key={listing._id}
-              id={listing._id} 
+              key={listing.id}
+              id={listing.id} 
               image={listing.image}
               title={listing.title}
               type={listing.type}
@@ -68,7 +67,7 @@ function TotalCards() {
             />
           ))
         ) : (
-          <h1 className='preloader'>No results found!</h1>
+          <div className='preloader'>No results found!</div>
         )}
       </div>
     </div>

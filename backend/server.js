@@ -147,6 +147,8 @@ app.post('/api/bookings', authenticateJWT, async (req, res) => {
   }
 });
 
+
+
 // Admin Routes
 // Add a new listing
 app.post('/api/admin/listings', authenticateJWT, authorizeAdmin, async (req, res) => {
