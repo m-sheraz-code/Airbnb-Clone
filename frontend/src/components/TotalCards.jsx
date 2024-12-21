@@ -93,6 +93,7 @@ function TotalCards() {
               price={listing.price}
               rating={listing.rating}
               onDelete={handleDeleteListing}
+              status={listing.status}
             />
           ))
         ) : (

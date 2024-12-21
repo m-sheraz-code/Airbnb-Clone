@@ -15,10 +15,6 @@ function BookingPage() {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-  
-  const userId = user ? user.userId : null;
-
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -40,21 +36,27 @@ function BookingPage() {
       alert("Please fill in all fields.");
       return;
     }
-
-    if (!userId) {
+  
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
       alert("You must be logged in to make a booking.");
       return;
     }
-
+  
     try {
-      const response = await axios.post('http://localhost:5000/api/bookings', {
-        listingId: id,
-        checkIn,
-        checkOut,
-        name,
-        userId
-      });
-
+      const response = await axios.post(
+        'http://localhost:5000/api/bookings',
+        {
+          listingId: id,
+          checkIn,
+          checkOut
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+  
       if (response.status === 200) {
         setBookingSuccess(true);
       }
@@ -63,6 +65,7 @@ function BookingPage() {
       alert("There was an issue creating your booking. Please try again.");
     }
   };
+  
 
   const calculateTotal = () => {
     if (checkIn && checkOut) {

@@ -4,14 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUsername] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
-  // Load the username from localStorage on component mount
   useEffect(() => {
     try {
       const userData = localStorage.getItem('user');
       const user = userData ? JSON.parse(userData) : null;
       setUsername(user ? user.username : null);
+      setUserRole(user ? user.role : null);
     } catch (error) {
       console.error('Error parsing user data from localStorage:', error);
     }
@@ -22,9 +23,10 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user'); // Clear user data
-    setUsername(null); // Reset username
-    navigate('/'); // Redirect to home
+    localStorage.removeItem('user');
+    setUsername(null);
+    setUserRole(null);
+    navigate('/'); 
   };
 
   return (
@@ -53,6 +55,21 @@ const Navbar = () => {
           Online Experiences
         </Link>
         <div className="right-menu-mobile">
+        {userRole === 'admin' && (
+              <Link to="/booking-list">
+                <i
+                  style={{
+                    fontSize: '24px',
+                    color: 'white',
+                    padding: '10px 13px',
+                    borderRadius: '50%',
+                    backgroundColor: '#ff385c',
+                    border: 'none',
+                  }}
+                  className="fa fa-list"></i>
+                <p>Booking List</p>
+              </Link>
+          )}
           {username && (
             <Link to="/add-listing">
               <i
@@ -100,6 +117,21 @@ const Navbar = () => {
       </div>
 
       <div className="right-menu">
+      {userRole === 'admin' && (
+            <Link to="/booking-list">
+              <i
+                style={{
+                  fontSize: '24px',
+                  color: 'white',
+                  padding: '10px 13px',
+                  borderRadius: '50%',
+                  backgroundColor: '#ff385c',
+                  border: 'none',
+                }}
+                className="fa fa-list"></i>
+              <p>Booking List</p>
+            </Link>
+        )}
         {username && (
             <Link to="/add-listing">
               <i

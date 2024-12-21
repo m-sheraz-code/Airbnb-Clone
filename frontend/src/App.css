@@ -636,11 +636,16 @@ html,body {
   margin-bottom: 5px;
 }
 
-.add-listing-form input {
+.add-listing-form input, .add-listing-form select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.add-listing-form select option:hover{
+  background-color: #e8325b !important;
+  color: white;
 }
 
 .add-listing-form button {
@@ -735,6 +740,71 @@ html,body {
   top: -20px; 
   right: -15px;
 }
+
+
+
+/* Booking List */
+.booking-list {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  color: #333;
+}
+
+.booking-list h1 {
+  text-align: center;
+  color: #ff385c;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.booking-list .table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 30px;
+}
+
+.booking-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  min-width: 800px;
+}
+
+.booking-list table th,
+.booking-list table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 16px;
+}
+
+.booking-list table th {
+  background-color: #f8f8f8;
+  color: #555;
+  font-weight: bold;
+}
+
+.booking-list table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.booking-list table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.booking-list button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.booking-list button:hover{
+  background-color: var(--color-hover-bg);
+}
+
 
 @media (max-width: 400px) { 
   /*NAVBAR*/

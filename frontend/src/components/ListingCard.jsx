@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating, onDelete }) {
+function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating, onDelete, status }) {
   const [showModal, setShowModal] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
@@ -21,7 +21,9 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
   }, []);
 
   const handleCardClick = () => {
-    setShowModal(true);
+    if (status === 'live') {
+      setShowModal(true);
+    }
   };
 
   const handleClose = () => {
@@ -33,7 +35,7 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
   };
 
   const handleDelete = (e) => {
-    e.stopPropagation(); // Prevent triggering card click
+    e.stopPropagation(); 
     onDelete(id);
   };
 
@@ -58,7 +60,7 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
       <div className="listing-card" onClick={handleCardClick}>
         <div className="image-container">
           <img src={fullImageUrl} alt={title} className="listing-image" />
-          <div className="live-tag"><strong>Live</strong></div>
+          <div className="live-tag" style={{textTransform: 'capitalize'}}><strong>{status}</strong></div>
           {userRole === 'admin' && (
             <div onClick={handleDelete} className="del-btn">
               <i className="fa fa-solid fa-trash"></i>

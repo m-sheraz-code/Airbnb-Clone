@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
 import LoginSignup from './pages/LoginSignup';
 import AddListing from './pages/AddListingPage';
+import BookingList from './pages/BookingListPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/bookings/:id" element={<BookingPage />} />
         <Route path="/profile" element={<LoginSignup />} />
         <Route path="/add-listing" element={<AddListing />} />
+        <Route path="/booking-list" element={<BookingList />} />
       </Routes>
     </Router>
   );

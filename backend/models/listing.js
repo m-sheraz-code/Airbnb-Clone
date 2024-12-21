@@ -11,6 +11,11 @@ const ListingSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   rating: { type: Number, required: true },
   category: { type: String, required: true },
+  status: {
+    type: String,
+    enum: ['live', 'booked'],
+    default: 'live',
+  },
 });
 
 module.exports = mongoose.model('Listing', ListingSchema,'listings');

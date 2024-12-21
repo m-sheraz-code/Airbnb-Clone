@@ -141,12 +141,20 @@ app.post('/api/bookings', authenticateJWT, async (req, res) => {
   try {
     const booking = new Booking({ listingId, userId: req.user.id, checkIn, checkOut });
     await booking.save();
+     const updatedListing = await Listing.findByIdAndUpdate(
+      listingId,
+      { status: 'booked' },
+      { new: true }
+    );
+
+    if (!updatedListing) {
+      return res.status(404).json({ message: 'Listing not found' });
+    }
     res.json({ message: 'Booking created successfully', booking });
   } catch (error) {
     res.status(500).json({ message: 'Error creating booking', error });
   }
 });
-
 
 
 // Admin Routes
@@ -181,6 +189,31 @@ app.get('/api/admin/bookings', authenticateJWT, authorizeAdmin, async (req, res)
     res.status(500).json({ message: 'Error fetching bookings', error });
   }
 });
+
+// Clear all bookings
+app.delete('/api/admin/bookings', authenticateJWT, authorizeAdmin, async (req, res) => {
+  try {
+    await Booking.deleteMany({});
+    res.json({ message: 'All bookings have been cleared.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error clearing bookings', error });
+  }
+});
+
+// Delete a specific booking
+app.delete('/api/admin/bookings/:id', authenticateJWT, authorizeAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+    if (!deletedBooking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+    res.json({ message: 'Booking deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting booking', error });
+  }
+});
+
 
 // Start server
 app.listen(PORT, () => {
