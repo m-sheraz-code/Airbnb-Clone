@@ -3,23 +3,22 @@ import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating }) {
+function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, price, rating, onDelete }) {
   const [showModal, setShowModal] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
   const fullImageUrl = `http://localhost:5000${image}`;
 
-  // Load the username from localStorage on component mount
-    useEffect(() => {
-      try {
-        const userData = localStorage.getItem('user');
-        const user = userData ? JSON.parse(userData) : null;
-        setUserRole(user ? user.role : null);
-      } catch (error) {
-        console.error('Error parsing user data from localStorage:', error);
-      }
-    }, []);
+  useEffect(() => {
+    try {
+      const userData = localStorage.getItem('user');
+      const user = userData ? JSON.parse(userData) : null;
+      setUserRole(user ? user.role : null);
+    } catch (error) {
+      console.error('Error parsing user data from localStorage:', error);
+    }
+  }, []);
 
   const handleCardClick = () => {
     setShowModal(true);
@@ -33,15 +32,16 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
     navigate(`/bookings/${id}`);
   };
 
-  const handleDeleteCard = () =>{
-    
+  const handleDelete = (e) => {
+    e.stopPropagation(); // Prevent triggering card click
+    onDelete(id);
   };
 
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starType = (i <= Math.floor(rating)) ? 'fa-star' : 'fa-star-o';
-      const halfStar = (i === Math.ceil(rating) && !Number.isInteger(rating)) ? 'fa-star-half-o' : starType;
+      const starType = i <= Math.floor(rating) ? 'fa-star' : 'fa-star-o';
+      const halfStar = i === Math.ceil(rating) && !Number.isInteger(rating) ? 'fa-star-half-o' : starType;
       stars.push(
         <i
           key={i}
@@ -59,7 +59,11 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
         <div className="image-container">
           <img src={fullImageUrl} alt={title} className="listing-image" />
           <div className="live-tag"><strong>Live</strong></div>
-          {userRole === 'admin' && (<div onClick={handleDeleteCard} className="del-btn"><i className="fa fa-solid fa-trash"></i></div>)}
+          {userRole === 'admin' && (
+            <div onClick={handleDelete} className="del-btn">
+              <i className="fa fa-solid fa-trash"></i>
+            </div>
+          )}
         </div>
         <div className="listing-info">
           <h3>{title}</h3>
@@ -108,11 +112,9 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
             </li>
           </ul>
         </Modal.Body>
-
-
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleClose}>Close</button>
-          <button className="btn btn-primary" onClick={handleBooking}>Book Now</button> 
+          <button className="btn btn-primary" onClick={handleBooking}>Book Now</button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -49,7 +49,7 @@ html,body {
 }
 
 .logo img {
-  height: 70px;
+  height: 100px;
 }
 
 .nav-links {
@@ -70,6 +70,12 @@ html,body {
 .nav-links a:hover {
   background-color: var(--color-primary);
   color: var(--color-white);
+}
+
+.right-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .right-menu .user-icon {
@@ -510,7 +516,7 @@ html,body {
 
 .booking-page {
   max-width: 800px;
-  margin: 20px auto;
+  margin: 50px auto;
   position: relative;
   padding: 20px;
   color: #333;
@@ -604,6 +610,132 @@ html,body {
 }
 
 
+
+/*Add listing by users*/
+
+.add-listing-page {
+  max-width: 800px;
+  margin: 50px auto;
+  position: relative;
+  padding: 20px;
+  color: #333;
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.add-listing-form div {
+  margin-bottom: 15px;
+}
+
+.add-listing-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.add-listing-form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-listing-form button {
+  padding: 10px 15px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-listing-form button:hover {
+  background-color: var(--color-hover-bg);
+}
+
+.add-listing-page .pin-img {
+  width: 10%;
+  position: absolute;
+  top: -20px; 
+  right: -15px;
+}
+
+
+/*Login Signup Page*/
+
+.login-signup-container {
+  max-width: 400px;
+  margin: 50px auto;
+  position: relative;
+  padding: 20px;
+  color: #333;
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-signup-container .input-group {
+  margin-bottom: 15px;
+}
+
+.login-signup-container .input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-signup-container .input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.login-signup-container button {
+  padding: 10px 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-signup-container button:hover {
+  background-color: #ff2a3d;
+}
+
+.login-signup-container .error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.login-signup-container .toggle-link{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.login-signup-container .toggle-link a {
+  color: #ff385c !important;
+  cursor: pointer;
+}
+
+.login-signup-container .pin-img {
+  width: 15%;
+  position: absolute;
+  top: -20px; 
+  right: -15px;
+}
+
 @media (max-width: 400px) { 
   /*NAVBAR*/
 
@@ -625,8 +757,13 @@ html,body {
 
   .nav-links a {
     font-size: 15px;
+    font-weight: 400;
   }
   
+  .logo img {
+    height: 80px;
+  }  
+
   
   .nav-links.active {
     left: 0;
@@ -647,8 +784,9 @@ html,body {
 
   .right-menu-mobile{
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: start;
+    flex-direction: column;
   }
 
   .right-menu-mobile a{
@@ -771,58 +909,20 @@ html,body {
     top: -15px; 
     right: -5px;
   }
+  
+  /*Add listing by users*/
 
-}
+  .add-listing-page {
+    margin: 50px 20px;
+  }
 
+  .add-listing-page .pin-img {
+    width: 15%;
+  }
 
+  /*Login Signup Page*/
+  .login-signup-container {
+    margin: 50px 20px;
+  }
 
-/*Login Signup Page*/
-
-.login-signup-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-}
-
-.login-signup-container .input-group {
-  margin-bottom: 15px;
-}
-
-.login-signup-container .input-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.login-signup-container .input-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.login-signup-container button {
-  padding: 10px 15px;
-  background-color: #ff385c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-signup-container button:hover {
-  background-color: #ff2a3d;
-}
-
-.login-signup-container .error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.login-signup-container .toggle-link button {
-  background: none;
-  border: none;
-  color: #ff385c;
-  cursor: pointer;
 }

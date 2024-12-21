@@ -48,7 +48,10 @@ function LoginSignup() {
     <>
     <Navbar/>
     <div className="login-signup-container">
-      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+      <div className='top-heading'>
+        <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+        <img src={require("../assets/pin.png")} className='pin-img' alt='Pin'/>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="username">Username</label>
@@ -93,10 +96,10 @@ function LoginSignup() {
       <div className="toggle-link">
         <p>
           {isLogin ? "Don't have an account?" : 'Already have an account?'}
-          <button onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Sign Up' : 'Login'}
-          </button>
         </p>
+        <a onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? 'Sign Up' : 'Login'}
+        </a>
       </div>
     </div>
     <Footer/>
