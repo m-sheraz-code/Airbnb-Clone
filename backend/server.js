@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
 const dotenv = require('dotenv');
 const path = require('path'); 
 
@@ -23,6 +24,7 @@ const User = require('./models/user');
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'public/images'))); 
+const upload = multer({ dest: 'public/images' }); 
 
 // Connect to MongoDB
 mongoose
@@ -159,7 +161,7 @@ app.post('/api/bookings', authenticateJWT, async (req, res) => {
 
 // Admin Routes
 // Add a new listing
-app.post('/api/admin/listings', authenticateJWT, authorizeAdmin, async (req, res) => {
+app.post('/api/admin/listings', authenticateJWT, async (req, res) => {
   try {
     const listing = new Listing(req.body);
     await listing.save();

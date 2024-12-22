@@ -45,8 +45,7 @@ function BookingPage() {
     }
   
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/bookings',
+      const response = await axios.post('http://localhost:5000/api/bookings',
         {
           listingId: id,
           checkIn,
