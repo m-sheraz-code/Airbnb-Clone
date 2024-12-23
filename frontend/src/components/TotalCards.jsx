@@ -11,6 +11,10 @@ function TotalCards() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const listingsPerPage = 9;
+
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -36,6 +40,7 @@ function TotalCards() {
       return matchesSearch && matchesCategory;
     });
     setFilteredResults(results);
+    setCurrentPage(1); // Reset to the first page when filters change
   }, [searchTerm, selectedCategory, listings]);
 
   const handleDeleteListing = async (id) => {
@@ -44,7 +49,7 @@ function TotalCards() {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`, 
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
 
@@ -60,10 +65,19 @@ function TotalCards() {
     }
   };
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredResults.length / listingsPerPage);
+  const currentListings = filteredResults.slice(
+    (currentPage - 1) * listingsPerPage,
+    currentPage * listingsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   if (loading) {
-    return (
-      <div className="preloader">Loading...</div>
-    );
+    return <div className="preloader">Loading...</div>;
   }
 
   if (error) {
@@ -71,7 +85,7 @@ function TotalCards() {
   }
 
   if (!loading && listings.length === 0) {
-    return <h2 style={{ textAlign: 'center' }}>No listings available at the moment.</h2>;
+    return <h2 style={{ textAlign: 'center', marginTop: '120px', marginBottom: '120px', color: '#ff385c'}}>No listings available at the moment.</h2>;
   }
 
   return (
@@ -79,8 +93,8 @@ function TotalCards() {
       <SearchBar onSearch={setSearchTerm} />
       <Categories onCategorySelect={setSelectedCategory} />
       <div className="total-cards">
-        {filteredResults.length > 0 ? (
-          filteredResults.map((listing) => (
+        {currentListings.length > 0 ? (
+          currentListings.map((listing) => (
             <ListingCard
               key={listing.id}
               id={listing._id}
@@ -97,8 +111,20 @@ function TotalCards() {
             />
           ))
         ) : (
-          <div className='preloader' style={{ height: '100px' }}>No results found!</div>
+          <div className="preloader" style={{ height: '100px' }}>No results found!</div>
         )}
+      </div>
+      {/* Pagination */}
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

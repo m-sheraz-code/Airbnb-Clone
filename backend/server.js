@@ -24,7 +24,18 @@ const User = require('./models/user');
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'public/images'))); 
-const upload = multer({ dest: 'public/images' }); 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/images');
+  },
+  filename: (req, file, cb) => {
+    const id = req.body.id;
+    const ext = path.extname(file.originalname);
+    cb(null, `image${id}${ext}`);
+  },
+});
+
+const upload = multer({ storage });
 
 // Connect to MongoDB
 mongoose
@@ -57,7 +68,6 @@ const authorizeAdmin = (req, res, next) => {
   next();
 };
 
-// Routes
 // User registration
 app.post('/api/auth/register', async (req, res) => {
   const { username, password, role = 'user' } = req.body;
@@ -68,9 +78,15 @@ app.post('/api/auth/register', async (req, res) => {
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Error registering user', error });
+    if (error.code === 11000) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+    res.status(500).json({ message: 'Error registering user', error: error.message });
   }
 });
+
+
+
 
 // User login
 app.post('/api/auth/login', async (req, res) => {
@@ -161,15 +177,44 @@ app.post('/api/bookings', authenticateJWT, async (req, res) => {
 
 // Admin Routes
 // Add a new listing
-app.post('/api/admin/listings', authenticateJWT, async (req, res) => {
+app.post('/api/admin/listings', authenticateJWT, upload.single('image'), async (req, res) => {
   try {
-    const listing = new Listing(req.body);
+    const { title, type, category, price, guests, bedrooms, bathrooms, rating } = req.body;
+    const image = req.file.filename; 
+
+    if (!title || !type || !category || !price || !guests || !bedrooms || !bathrooms || !rating || !req.file) {
+      return res.status(400).json({ message: 'All fields, including an image and rating, are required' });
+    }
+
+    const lastListing = await Listing.findOne().sort({ id: -1 }).limit(1);
+    const newId = lastListing ? lastListing.id + 1 : 1;
+
+    const listing = new Listing({ 
+      id: newId, 
+      title, 
+      type, 
+      category, 
+      price, 
+      guests, 
+      bedrooms, 
+      bathrooms, 
+      rating, 
+      image,
+    });
+
     await listing.save();
     res.status(201).json({ message: 'Listing added successfully', listing });
   } catch (error) {
-    res.status(500).json({ message: 'Error adding listing', error });
+    if (error instanceof multer.MulterError) {
+      res.status(400).json({ message: 'File upload error', error: error.message });
+    } else {
+      res.status(500).json({ message: 'Error adding listing', error: error.message });
+    }
   }
 });
+
+
+
 
 // Delete a listing
 app.delete('/api/admin/listings/:id', authenticateJWT, authorizeAdmin, async (req, res) => {

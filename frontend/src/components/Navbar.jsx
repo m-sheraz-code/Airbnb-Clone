@@ -70,7 +70,7 @@ const Navbar = () => {
                 <p>Booking List</p>
               </Link>
           )}
-          {username && (
+          {(userRole === 'admin' ||  userRole === 'host') && (
             <Link to="/add-listing">
               <i
                 style={{
@@ -132,7 +132,7 @@ const Navbar = () => {
               <p>Booking List</p>
             </Link>
         )}
-        {username && (
+        {(userRole === 'admin' ||  userRole === 'host')  && (
             <Link to="/add-listing">
               <i
                 style={{

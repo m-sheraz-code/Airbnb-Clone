@@ -16,6 +16,12 @@ function AddListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Ensure all fields are filled before submitting
+    if (!title || !type || !category || !price || !guests || !bedrooms || !bathrooms || !image) {
+      setMessage('All fields, including an image, are required.');
+      return;
+    }
+
     // Form data for API submission
     const formData = new FormData();
     formData.append('title', title);
@@ -25,12 +31,16 @@ function AddListing() {
     formData.append('guests', guests);
     formData.append('bedrooms', bedrooms);
     formData.append('bathrooms', bathrooms);
+    formData.append('rating', 0); // Default rating
     formData.append('image', image);
 
     try {
       const response = await fetch('http://localhost:5000/api/admin/listings', {
         method: 'POST',
         body: formData,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Ensure token is available
+        },
       });
 
       if (response.ok) {
@@ -44,7 +54,8 @@ function AddListing() {
         setBathrooms('');
         setImage(null);
       } else {
-        setMessage('Error adding listing. Please try again.');
+        const errorData = await response.json();
+        setMessage(`Error: ${errorData.message || 'Something went wrong. Please try again.'}`);
       }
     } catch (error) {
       console.error('Error adding listing:', error);
@@ -81,9 +92,7 @@ function AddListing() {
               onChange={(e) => setType(e.target.value)}
               required
             >
-              <option value="" disabled>
-                Select Type
-              </option>
+              <option value="" disabled>Select Type</option>
               <option value="Apartment">Apartment</option>
               <option value="House">House</option>
               <option value="Condo">Condo</option>
@@ -97,9 +106,7 @@ function AddListing() {
               onChange={(e) => setCategory(e.target.value)}
               required
             >
-              <option value="" disabled>
-                Select Category
-              </option>
+              <option value="" disabled>Select Category</option>
               <option value="room">Room</option>
               <option value="top-cities">Top cities</option>
               <option value="amazing-views">Amazing views</option>

@@ -11,13 +11,24 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
   const fullImageUrl = `http://localhost:5000${image}`;
 
   useEffect(() => {
-    try {
-      const userData = localStorage.getItem('user');
-      const user = userData ? JSON.parse(userData) : null;
-      setUserRole(user ? user.role : null);
-    } catch (error) {
-      console.error('Error parsing user data from localStorage:', error);
-    }
+    const updateUserRole = () => {
+      try {
+        const userData = localStorage.getItem('user');
+        const user = userData ? JSON.parse(userData) : null;
+        setUserRole(user ? user.role : null);
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+      }
+    };
+
+    updateUserRole();
+
+    // Add event listener to update role on logout
+    window.addEventListener('storage', updateUserRole);
+
+    return () => {
+      window.removeEventListener('storage', updateUserRole);
+    };
   }, []);
 
   const handleCardClick = () => {
@@ -35,7 +46,7 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
   };
 
   const handleDelete = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     onDelete(id);
   };
 
@@ -60,7 +71,7 @@ function ListingCard({ id, image, title, type, guests, bedrooms, bathrooms, pric
       <div className="listing-card" onClick={handleCardClick}>
         <div className="image-container">
           <img src={fullImageUrl} alt={title} className="listing-image" />
-          <div className="live-tag" style={{textTransform: 'capitalize'}}><strong>{status}</strong></div>
+          <div className="live-tag" style={{ textTransform: 'capitalize' }}><strong>{status}</strong></div>
           {userRole === 'admin' && (
             <div onClick={handleDelete} className="del-btn">
               <i className="fa fa-solid fa-trash"></i>
